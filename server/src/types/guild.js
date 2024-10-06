@@ -8,6 +8,24 @@ class Guild {
         this.demonCount = demonCount
         this.creatorPointsCount = creatorPointsCount
     }
+
+    toArray() {
+        return new Array(this.name, this.guildID, this.playerCount, this.starCount, this.moonCount, this.demonCount, this.creatorPointsCount)
+    }
+
+    toObject() {
+        const obj = {
+            name: this.name,
+            guildID: this.guildID,
+            playerCount: this.playerCount,
+            starCount: this.starCount,
+            moonCount: this.moonCount,
+            demonCount: this.demonCount,
+            creatorPointsCount: this.creatorPointsCount
+        }
+
+        return obj
+    }
 }
 
 exports.Guild = Guild
