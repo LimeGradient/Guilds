@@ -43,6 +43,12 @@ app.post('/guilds/createGuild', (req, res) => {
         }
 
         res.send(JSON.stringify(msg))
+    }).catch((err) => {
+        const msg = {
+            "error": err
+        }
+
+        res.send(JSON.stringify(msg))
     })
 })
 
