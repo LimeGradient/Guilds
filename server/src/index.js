@@ -26,6 +26,12 @@ app.get('/guilds/getGuild/:guildID', (req, res) => {
     })
 })
 
+app.get('/guilds/getGuildsLeaderboard', (req, res) => {
+    database.getGuildsLeaderboard().then((leaderboard) => {
+        res.send(JSON.stringify(leaderboard))
+    })
+})
+
 app.post('/guilds/createGuild', (req, res) => {
     const guild = new Guild(
         req.body.name,

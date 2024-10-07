@@ -49,6 +49,27 @@ class Database {
             })
         })
     }
+
+    getGuildsLeaderboard() {
+        return new Promise((resolve, reject) => {
+            this.guildDB.serialize(() => {
+                this.guildDB.all("SELECT * FROM guilds;", [], (err, rows) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        let guildArr = []
+                        rows.forEach((row) => {
+                            let guildRating = row.starCount + row.moonCount + row.demonCount + row.creatorPointCount;
+                            guildArr.push(new guild.LeaderboardGuild(row.name, row.guildID, row.playerCount, row.starCount, row.moonCount, row.demonCount, row.creatorPointCount, guildRating))
+                        })
+
+                        guildArr.sort((a, b) => b.guildRating - a.guildRating)
+                        resolve(guildArr)
+                    }
+                })
+            })
+        })
+    }
 }
 
 exports.Database = Database
